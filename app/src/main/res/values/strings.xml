@@ -6,4 +6,5 @@
     <string name="movie_detail_section_title_overview">Overview</string>
     <string name="movie_detail_section_title_main_cast">Main Cast</string>
     <string name="menu_main_sort_by">Sort by</string>
+    <string name="_10">/10</string>
 </resources>
