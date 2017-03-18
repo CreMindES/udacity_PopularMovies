@@ -20,16 +20,21 @@ import java.util.Scanner;
  */
 
 public class TheMovieDBAPI {
-    public static final String API_KEY = "INSERT_YOUR_API_KEY_HERE";
+    // public static final String API_KEY = "INSERT_YOUR_API_KEY_HERE";
+    public static final String API_KEY = "0597b78d40c8e18d19cbf973e5234897";
     public static final String API_KEY_PARAM = "api_key";
 
     public static final String API_BASE_URL = "http://api.themoviedb.org/3/movie";
-    public static final String API_IMAGE_HEADER_LARGE = "http://image.tmdb.org/t/p/w500";
+    public static final String API_IMAGE_HEADER_LARGE  = "http://image.tmdb.org/t/p/w500";
     public static final String API_IMAGE_HEADER_MEDIUM = "http://image.tmdb.org/t/p/w185";
-    public static final String API_IMAGE_HEADER_SMALL = "http://image.tmdb.org/t/p/w92";
+    public static final String API_IMAGE_HEADER_SMALL  = "http://image.tmdb.org/t/p/w92";
 
-    public static final String SORT_BY_TOP_RATED = "top_rated";
+    public static final String API_VIDEOS_SUFFIX = "videos";
+    public static final String API_CAST_SUFFIX   = "casts";
+
+    public static final String SORT_BY_TOP_RATED  = "top_rated";
     public static final String SORT_BY_POPOLARITY = "popular";
+    public static final String SORT_BY_FAVOURITES = "favourites";
 
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
 
@@ -46,7 +51,7 @@ public class TheMovieDBAPI {
         ArrayList<Cast> castList = null;
 
         // Assembly query URL
-        String URL = API_BASE_URL + "/" + id + "/casts";
+        String URL = API_BASE_URL + "/" + id + "/" + API_CAST_SUFFIX;
         Uri builtUri = Uri.parse(URL).buildUpon()
                 .appendQueryParameter(API_KEY_PARAM, API_KEY)
                 .build();
@@ -67,6 +72,33 @@ public class TheMovieDBAPI {
         }
 
         return castList;
+    }
+
+    public static ArrayList<MovieVideo> getMovieVideoList(int id) {
+        ArrayList<MovieVideo> movieVideoList = null;
+
+        // Assembly query URL
+        String URL = API_BASE_URL + "/" + id + "/" + API_VIDEOS_SUFFIX;
+        Uri builtUri = Uri.parse(URL).buildUpon()
+                .appendQueryParameter(API_KEY_PARAM, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        // Perform Query
+        String jsonResponse = performTheMovieDBQuery(url);
+
+        // Fetch relevant information
+        if (jsonResponse != null) {
+            movieVideoList = new ArrayList<MovieVideo>(fetchTheMovieVideoDBJSON(jsonResponse));
+        }
+
+        return movieVideoList;
     }
 
     private static URL makeMovieListQuery(MainActivity.SortBy sortBy) {
@@ -156,7 +188,6 @@ public class TheMovieDBAPI {
                 myMovie.setId(movieJSONObject.getInt("id"));
                 myMovie.setOriginalTitle(movieJSONObject.getString("original_title"));
                 myMovie.setDate(movieJSONObject.getString("release_date"));
-                // myMovie.setPopularity(movieJSONObject.getString("popularity"));
                 myMovie.setRating(movieJSONObject.getString("vote_average"));
                 myMovie.setPosterURL(movieJSONObject.getString("poster_path"));
                 myMovie.setBackdropURL(movieJSONObject.getString("backdrop_path"));
@@ -208,6 +239,44 @@ public class TheMovieDBAPI {
         }
 
         return castList;
+    }
+
+    private static ArrayList<MovieVideo> fetchTheMovieVideoDBJSON(String json) {
+        if (json == null) {
+            return null;
+        }
+
+        ArrayList<MovieVideo> movieVideoList = new ArrayList<MovieVideo>();
+
+        try {
+            JSONObject movieVideoObject = new JSONObject(json);
+            JSONArray movieVideoJsonArray = movieVideoObject.getJSONArray("results");
+
+            for (int i = 0; i < movieVideoJsonArray.length(); ++i) {
+                JSONObject videoJSONObject = null;
+                try {
+                    videoJSONObject = movieVideoJsonArray.getJSONObject(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                MovieVideo v = new MovieVideo();
+                v.setId( videoJSONObject.getString("id") );
+                v.setTitle( videoJSONObject.getString("name") );
+                v.setKey( videoJSONObject.getString("key") );
+                v.setSite( videoJSONObject.getString("site") );
+                v.setType( videoJSONObject.getString("type") );
+
+                movieVideoList.add( v );
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return movieVideoList;
     }
 
 }

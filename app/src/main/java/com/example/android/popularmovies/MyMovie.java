@@ -13,8 +13,7 @@ import java.util.Date;
  * Created by cremindes on 07/02/17.
  */
 
-public class MyMovie implements Parcelable
-{
+public class MyMovie implements Parcelable {
     private int id;
     private String title;
     private String originalTitle;
