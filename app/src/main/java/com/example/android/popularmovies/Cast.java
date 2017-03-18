@@ -6,8 +6,7 @@ import java.net.URL;
  * Created by cremindes on 08/02/17.
  */
 
-public class Cast
-{
+public class Cast {
     private int mId;
     private int mCastId;
     private String mCharacter;

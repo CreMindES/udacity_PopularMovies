@@ -17,8 +17,9 @@ import java.util.ArrayList;
  * Created by cremindes on 09/02/17.
  */
 
-public class MovieCastAdapter extends RecyclerView.Adapter< MovieCastAdapter.MovieCastAdapterViewHolder >
-{
+public class MovieCastAdapter
+        extends RecyclerView.Adapter< MovieCastAdapter.MovieCastAdapterViewHolder > {
+
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
     private ArrayList<Cast> movieCastData;
 
@@ -53,7 +54,12 @@ public class MovieCastAdapter extends RecyclerView.Adapter< MovieCastAdapter.Mov
     public void onBindViewHolder( MovieCastAdapter.MovieCastAdapterViewHolder holder, int position ) {
         Cast cast = movieCastData.get( position );
         Context context = holder.profileImageView.getContext();
-        Picasso.with( context ).load( cast.getProfileURL().toString() ).into( holder.profileImageView );
+        Picasso.with( context )
+                .load( cast.getProfileURL().toString() )
+                .placeholder( R.drawable.placeholder_100x150 )
+                .error( R.drawable.placeholder_100x150 )
+                .into( holder.profileImageView );
+
         holder.nameTextView.setText( cast.getName() );
         holder.characterTextView.setText( cast.getCharacter() );
     }
