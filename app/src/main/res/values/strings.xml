@@ -1,11 +1,23 @@
 <resources>
     <string name="app_name">Popular Movies</string>
-    <string name="movie_no_plot">No Overview was Found</string>
+
+    <string name="menu_main_sort_by">Sort by</string>
+
     <string name="cont_desc_movie_backdrop_image">Movie backdrop image</string>
     <string name="cont_desc_movie_poster_image">Movie poster image</string>
+    <string name="cont_desc_movie_play_button_image">Play button</string>
+
     <string name="movie_detail_section_title_overview">Overview</string>
+    <string name="movie_no_plot">No Overview was Found</string>
     <string name="movie_detail_section_title_videos">Videos</string>
+    <string name="movie_detail_section_title_reviews">Reviews</string>
     <string name="movie_detail_section_title_main_cast">Main Cast</string>
-    <string name="menu_main_sort_by">Sort by</string>
-    <string name="_10">/10</string>
+    <string name="movie_detail_max_point_10">/10</string>
+    <string name="movie_detail_play">play</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, tellus neque elit fusce sed. Libero eu pharetra. Lorem egestas aliquam consequat habitant quis mattis, vel praesent, cubilia pede erat et euismod, morbi proin volutpat sed pellentesque erat, lacus ut arcu. Elit erat tellus, aptent consectetuer at a, amet pretium, a sollicitudin mattis fringilla etiam vivamus, et pulvinar quis metus praesent justo. Nunc mauris, laoreet risus nec pharetra, nullam placerat.
+</string>
+    <string name="john_doe">John Doe</string>
+    <string name="sample_url">http://www.sample.url</string>
+
 </resources>

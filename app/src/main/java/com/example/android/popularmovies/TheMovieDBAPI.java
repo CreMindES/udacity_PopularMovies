@@ -29,8 +29,9 @@ public class TheMovieDBAPI {
     public static final String API_IMAGE_HEADER_MEDIUM = "http://image.tmdb.org/t/p/w185";
     public static final String API_IMAGE_HEADER_SMALL  = "http://image.tmdb.org/t/p/w92";
 
-    public static final String API_VIDEOS_SUFFIX = "videos";
-    public static final String API_CAST_SUFFIX   = "casts";
+    public static final String API_VIDEOS_SUFFIX  = "videos";
+    public static final String API_REVIEWS_SUFFIX = "reviews";
+    public static final String API_CAST_SUFFIX    = "casts";
 
     public static final String SORT_BY_TOP_RATED  = "top_rated";
     public static final String SORT_BY_POPOLARITY = "popular";
@@ -99,6 +100,33 @@ public class TheMovieDBAPI {
         }
 
         return movieVideoList;
+    }
+
+    public static ArrayList<Review> getMovieReviewList(int id) {
+        ArrayList<Review> movieReviewList = null;
+
+        // Assembly query URL
+        String URL = API_BASE_URL + "/" + id + "/" + API_REVIEWS_SUFFIX;
+        Uri builtUri = Uri.parse(URL).buildUpon()
+                .appendQueryParameter(API_KEY_PARAM, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        // Perform Query
+        String jsonResponse = performTheMovieDBQuery(url);
+
+        // Fetch relevant information
+        if (jsonResponse != null) {
+            movieReviewList = new ArrayList<Review>(fetchTheMovieReviewDBJSON(jsonResponse));
+        }
+
+        return movieReviewList;
     }
 
     private static URL makeMovieListQuery(MainActivity.SortBy sortBy) {
@@ -278,5 +306,48 @@ public class TheMovieDBAPI {
 
         return movieVideoList;
     }
+
+    private static ArrayList<Review> fetchTheMovieReviewDBJSON(String json) {
+        if (json == null) {
+            return null;
+        }
+
+        ArrayList<Review> movieReviewList = new ArrayList<Review>();
+
+        try {
+            JSONObject movieReviewObject = new JSONObject(json);
+            JSONArray movieReviewJsonArray = movieReviewObject.getJSONArray("results");
+
+            for (int i = 0; i < movieReviewJsonArray.length(); ++i) {
+                JSONObject videoJSONObject = null;
+                try {
+                    videoJSONObject = movieReviewJsonArray.getJSONObject(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                Review r = new Review();
+                r.setId( videoJSONObject.getString("id") );
+                r.setAuthor( videoJSONObject.getString("author") );
+                r.setContent( videoJSONObject.getString("content") );
+                try {
+                    r.setUrl( new URL( videoJSONObject.getString("url") ) );
+                } catch ( MalformedURLException e ) {
+                    e.printStackTrace();
+                    r.setUrl(null);
+                }
+
+                movieReviewList.add( r );
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return movieReviewList;
+    }
+
 
 }
