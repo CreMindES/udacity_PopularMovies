@@ -6,5 +6,15 @@
         android:icon="@drawable/sort_variant"
         android:title="@string/menu_main_sort_by"
         app:showAsAction="always"
-        android:orderInCategory="1"/>
+        android:orderInCategory="1">
+        <menu>
+            <item android:id="@+id/action_show_popular"
+                android:title="@string/menu_main_sortby_show_popular" />
+            <item android:id="@+id/action_show_top_rated"
+                android:title="@string/menu_main_sortby_show_top_rated" />
+            <item android:id="@+id/action_show_favourites"
+                android:title="@string/menu_main_sortby_show_favourites" />
+        </menu>
+    </item>
+
 </menu>

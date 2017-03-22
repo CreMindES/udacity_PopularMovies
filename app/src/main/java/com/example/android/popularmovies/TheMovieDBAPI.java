@@ -1,6 +1,8 @@
 package com.example.android.popularmovies;
 
+import android.content.res.Resources;
 import android.net.Uri;
+import android.provider.Settings;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -20,8 +22,7 @@ import java.util.Scanner;
  */
 
 public class TheMovieDBAPI {
-    // public static final String API_KEY = "INSERT_YOUR_API_KEY_HERE";
-    public static final String API_KEY = "0597b78d40c8e18d19cbf973e5234897";
+    public static final String API_KEY = "INSERT_YOUR_API_KEY_HERE";
     public static final String API_KEY_PARAM = "api_key";
 
     public static final String API_BASE_URL = "http://api.themoviedb.org/3/movie";
@@ -39,8 +40,8 @@ public class TheMovieDBAPI {
 
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
 
-    public static ArrayList<MyMovie> getMovieList(MainActivity.SortBy sortBy) {
-        String jsonResponse = performTheMovieDBQuery(makeMovieListQuery(sortBy));
+    public static ArrayList<MyMovie> getMovieList(int showMoviesBy) {
+        String jsonResponse = performTheMovieDBQuery(makeMovieListQuery(showMoviesBy));
         ArrayList<MyMovie> res = null;
         if (jsonResponse != null) {
             res = new ArrayList<MyMovie>(fetchTheMovieListDBJSON(jsonResponse));
@@ -129,11 +130,17 @@ public class TheMovieDBAPI {
         return movieReviewList;
     }
 
-    private static URL makeMovieListQuery(MainActivity.SortBy sortBy) {
+    private static URL makeMovieListQuery(int showMoviesBy) {
         // Build url
-        String URL = API_BASE_URL + "/" + sortBy.toQueryParam();
+        String suffix = null;
+        if( showMoviesBy == MainActivity.SHOW_POPULAR ) {
+            suffix = TheMovieDBAPI.SORT_BY_POPOLARITY;
+        } else if( showMoviesBy == MainActivity.SHOW_TOP_RATED ) {
+            suffix = TheMovieDBAPI.SORT_BY_TOP_RATED;
+        }
+        String URL = API_BASE_URL + "/" + suffix;
         Uri builtUri = Uri.parse(URL).buildUpon()
-                .appendQueryParameter("sort_by", sortBy.toQueryParam() + ".desc")
+                .appendQueryParameter("sort_by", suffix + ".desc")
                 .appendQueryParameter(API_KEY_PARAM, API_KEY)
                 .build();
 
@@ -217,8 +224,8 @@ public class TheMovieDBAPI {
                 myMovie.setOriginalTitle(movieJSONObject.getString("original_title"));
                 myMovie.setDate(movieJSONObject.getString("release_date"));
                 myMovie.setRating(movieJSONObject.getString("vote_average"));
-                myMovie.setPosterURL(movieJSONObject.getString("poster_path"));
-                myMovie.setBackdropURL(movieJSONObject.getString("backdrop_path"));
+                myMovie.setPosterUrlId(movieJSONObject.getString("poster_path"));
+                myMovie.setBackdropUrlId(movieJSONObject.getString("backdrop_path"));
 
                 res.add(myMovie);
             }

@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Popular Movies</string>
 
+    <string name="appbar_title_popular_movies">Popular Movies</string>
+    <string name="appbar_title_top_rated_movies">Top Rated Movies</string>
+    <string name="appbar_title_favourite_movies">Favourite Movies</string>
+
     <string name="menu_main_sort_by">Sort by</string>
+    <string name="menu_main_sortby_show_popular">Popular</string>
+    <string name="menu_main_sortby_show_top_rated">Top Rated</string>
+    <string name="menu_main_sortby_show_favourites">Favourite</string>
 
     <string name="cont_desc_movie_backdrop_image">Movie backdrop image</string>
     <string name="cont_desc_movie_poster_image">Movie poster image</string>
@@ -14,6 +21,10 @@
     <string name="movie_detail_section_title_main_cast">Main Cast</string>
     <string name="movie_detail_max_point_10">/10</string>
     <string name="movie_detail_play">play</string>
+
+    <string name="no_favourited_movie_yet">No favourite movie yet...</string>
+    <string name="movie_detail_favourited">Movie added to favourites :)</string>
+    <string name="movie_detail_unfavourited">Movie removed from favourites.</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, tellus neque elit fusce sed. Libero eu pharetra. Lorem egestas aliquam consequat habitant quis mattis, vel praesent, cubilia pede erat et euismod, morbi proin volutpat sed pellentesque erat, lacus ut arcu. Elit erat tellus, aptent consectetuer at a, amet pretium, a sollicitudin mattis fringilla etiam vivamus, et pulvinar quis metus praesent justo. Nunc mauris, laoreet risus nec pharetra, nullam placerat.
 </string>

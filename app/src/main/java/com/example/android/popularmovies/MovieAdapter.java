@@ -87,13 +87,24 @@ public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapte
 
     @Override
     public int getItemCount() {
+        Log.d( TAG, "getItemCount" );
         if( movieData == null ) { return 0; };
         return movieData.size();
     }
 
     public void setMovieData( ArrayList<MyMovie> newMovieData ) {
-        Log.d( TAG, String.valueOf( newMovieData.size() ) );
+        Log.d( TAG, "setMoviewData size is " + String.valueOf( newMovieData.size() ) );
         movieData = newMovieData;
         notifyDataSetChanged();
+    }
+
+    public void setFavouriteFlagsAt( ArrayList<Integer> favMovieIdList ) {
+        for( MyMovie m : movieData ) {
+            for (int fid : favMovieIdList) {
+                if (fid == m.getId()) {
+                    m.setFavourite(true);
+                }
+            }
+        }
     }
 }

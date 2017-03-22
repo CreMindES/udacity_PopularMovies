@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <FrameLayout
+        android:id="@+id/movie_video_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="10dp">
@@ -25,7 +26,7 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:layout_gravity="center"
-            android:text="play"
+            android:clickable="true"
             tools:src="@drawable/ic_play_arrow_white_48dp"/>
 
 

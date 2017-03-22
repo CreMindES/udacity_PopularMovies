@@ -1,13 +1,16 @@
 package com.example.android.popularmovies;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.popularmovies.data.FavMovieContract;
 import com.example.android.popularmovies.databinding.ActivityMovieDetailBinding;
 import com.squareup.picasso.Picasso;
 
@@ -114,6 +118,52 @@ public class MovieDetailActivity extends AppCompatActivity
         new FetchTheMovieCastDB().execute  ( new Integer( movie.getId() ) );
         new FetchTheMovieVideoDB().execute ( new Integer( movie.getId() ) );
         new FetchTheMovieReviewDB().execute( new Integer( movie.getId() ) );
+
+        int fabIconId = movie.isFavourite() ?
+                R.drawable.ic_favorite_white_48dp :
+                R.drawable.ic_favorite_border_white_48dp;
+        mBinding.movieDetailFab.setImageResource( fabIconId );
+        mBinding.movieDetailFab.setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v) {
+                setFavourite( !movie.isFavourite() );
+            }
+        });
+    }
+
+    public void setFavourite( boolean isFavourite ) {
+        if( isFavourite && !movie.isFavourite() ) {
+            // Add to favourites
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_ID, movie.getId());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_TITLE, movie.getTitle());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_TITLE_ORIG, movie.getOriginalTitle());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_PLOT, movie.getPlot());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_BACKDROPPATH, movie.getBackdropId());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_POSTERPATH, movie.getPosterId());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_RATING, movie.getRating());
+            contentValues.put(FavMovieContract.FavMovieEntry.COLUMN_RELEASEDATE, movie.getDate().getTime() / 1000);
+
+            Uri uri = getContentResolver().insert(FavMovieContract.FavMovieEntry.CONTENT_URI, contentValues);
+
+            if(uri != null) {
+                mBinding.movieDetailFab.setImageResource( R.drawable.ic_favorite_white_48dp );
+                Toast.makeText(getBaseContext(), getString(R.string.movie_detail_favourited),
+                        Toast.LENGTH_LONG).show();
+            }
+        } else if( !isFavourite && movie.isFavourite() ) {
+            // remove from favourites
+            Uri uri = FavMovieContract.FavMovieEntry.CONTENT_URI;
+            uri = uri.buildUpon().appendPath(String.valueOf(movie.getId())).build();
+            getContentResolver().delete( uri, null, null );
+
+            // TODO refresh parent UI
+
+            mBinding.movieDetailFab.setImageResource( R.drawable.ic_favorite_border_white_48dp );
+            Toast.makeText(getBaseContext(), getString(R.string.movie_detail_unfavourited),
+                    Toast.LENGTH_LONG).show();
+        } else {
+            // impossible currently
+        }
     }
 
     /**
