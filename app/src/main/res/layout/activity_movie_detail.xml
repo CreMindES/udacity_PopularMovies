@@ -67,7 +67,8 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_back_white_48dp"/>
+                        android:src="@drawable/ic_arrow_back_white_48dp"
+                        android:contentDescription="@string/cont_desc_movie_back_button_image" />
 
                 </android.support.v7.widget.Toolbar>
 
@@ -170,8 +171,6 @@
                                 android:textSize="12sp" />
 
                         </LinearLayout>
-
-
 
                     </LinearLayout>
 
