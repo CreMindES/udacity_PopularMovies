@@ -8,6 +8,7 @@
         android:id="@+id/movie_detail_coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context="com.example.android.popularmovies.MovieDetailActivity">
 
         <android.support.design.widget.AppBarLayout
@@ -15,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
-
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/movie_detail_collapsingToolbar"
@@ -25,8 +25,7 @@
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginStart="48dp"
-                app:expandedTitleMarginEnd="64dp"
-                tools:title="Sample Movie">
+                app:expandedTitleMarginEnd="64dp">
 
                 <ImageView
                     android:id="@+id/movie_detail_backdrop"
@@ -58,9 +57,20 @@
                     android:id="@+id/movie_detail_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin">
+
+                    <ImageButton
+                        android:id="@+id/movie_detail_tooolbar_backButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_arrow_back_white_48dp"/>
+
+                </android.support.v7.widget.Toolbar>
+
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 

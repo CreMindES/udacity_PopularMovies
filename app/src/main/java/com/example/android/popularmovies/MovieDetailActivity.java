@@ -55,15 +55,8 @@ public class MovieDetailActivity extends AppCompatActivity
 
         toolbar = (Toolbar) findViewById(R.id.movie_detail_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.movie_detail_collapsingToolbar);
-        collapsingToolbar.setTitle("Avengers: Age of Ultron");
-//        toolbar = (Toolbar) findViewById(R.id.movie_detail_toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
         intent = getIntent();
         movie = intent.getParcelableExtra( "Movie" );
@@ -128,6 +121,26 @@ public class MovieDetailActivity extends AppCompatActivity
                 setFavourite( !movie.isFavourite() );
             }
         });
+
+        mBinding.movieDetailTooolbarBackButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackClick(v);
+            }
+        });
+
+        mBinding.movieDetailPlayButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( movie.getVideoList().size() > 0 ) {
+                    playYoutube(movie.getVideoList().get(0));
+                }
+            }
+        });
+    }
+
+    private void onBackClick( View v ) {
+        NavUtils.navigateUpFromSameTask( this );
     }
 
     public void setFavourite( boolean isFavourite ) {
@@ -175,7 +188,11 @@ public class MovieDetailActivity extends AppCompatActivity
     @Override
     public void onClick( MovieVideo movieVideo ) {
         Log.d( TAG, "onClick movie video" );
-        Context context = this;
+        playYoutube( movieVideo );
+    }
+
+    public void playYoutube( MovieVideo movieVideo ) {
+
         try {
             Intent intent = new Intent( Intent.ACTION_VIEW, movieVideo.getYoutubeAppUri() );
             intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
@@ -279,6 +296,7 @@ public class MovieDetailActivity extends AppCompatActivity
             super.onPostExecute( movieVideoListData );
 
             if( movieVideoListData != null) {
+                movie.setVideoList( movieVideoListData );
                 movieVideoAdapter.setMovieData( movieVideoListData );
             } else {
                 Toast.makeText( getApplicationContext(), "Unable to fetch video list.",

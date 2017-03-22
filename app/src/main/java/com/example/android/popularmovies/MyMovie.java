@@ -7,6 +7,7 @@ import android.text.format.DateFormat;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,6 +27,7 @@ public class MyMovie implements Parcelable {
     private URL backdropURL;
     private double rating;
     private boolean mIsFavourite;
+    private ArrayList<MovieVideo> videoList;
 
     public MyMovie() {
         setTitle( "Title" );
@@ -65,7 +67,9 @@ public class MyMovie implements Parcelable {
             backdropURL = makeUrl( TheMovieDBAPI.API_IMAGE_HEADER_LARGE + backdropId );
         }
     }
+    public void setVideoList( ArrayList<MovieVideo> v ) { videoList = v; }
     public void setFavourite( boolean b ) { mIsFavourite = b; }
+
 
     public int    getId()            { return id;              }
     public String getTitle()         { return title;           }
@@ -78,6 +82,7 @@ public class MyMovie implements Parcelable {
     public URL getPosterURL()        { return posterURL;       }
     public URL getbackdropURL()      { return backdropURL;     }
     public boolean isFavourite()     { return mIsFavourite;    }
+    public ArrayList<MovieVideo> getVideoList() { return videoList; }
 
 
     public static java.net.URL makeUrl(String urlString) {
