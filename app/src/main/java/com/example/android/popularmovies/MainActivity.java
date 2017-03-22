@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loadMovieData( int showMoviesBy ) {
         new FetchTheMovieDB().execute( showMoviesBy );
+        noMovieTextView.setVisibility(View.INVISIBLE);
     }
 
     private void showFavouriteMovies() {
