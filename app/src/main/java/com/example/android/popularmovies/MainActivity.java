@@ -90,11 +90,8 @@ public class MainActivity extends AppCompatActivity
         progressBar = (ProgressBar) findViewById( R.id.activity_main_progress_bar );
         noMovieTextView = (TextView) findViewById( R.id.activity_main_no_movie );
 
-        if( showMoviesBy == SHOW_FAVOURITE ) {
-            new FetchFavouriteMovies().execute();
-        } else {
-            loadMovieData(showMoviesBy);
-        }
+        loadMovieData(showMoviesBy);
+        new FetchFavouriteMovies().execute();
     }
 
     @Override
