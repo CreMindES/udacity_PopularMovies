@@ -46,14 +46,12 @@ public class MovieReviewAdapter
 
         public TextView authorTextView;
         public TextView contentTextView;
-        public TextView urlTextView;
 
         public MovieReviewAdapterViewHolder( View view ) {
             super(view);
             authorTextView  = (TextView) view.findViewById( R.id.movie_review_author );
             contentTextView = (TextView) view.findViewById( R.id.movie_review_content );
-            // urlTextView     = (TextView) view.findViewById( R.id.movie_review_url );
-            // videoThumbnailImage.setOnClickListener(this);
+            contentTextView.setOnClickListener(this);
         }
 
         @Override

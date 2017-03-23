@@ -14,6 +14,7 @@
     <string name="cont_desc_movie_poster_image">Movie poster image</string>
     <string name="cont_desc_movie_play_button_image">Play button</string>
     <string name="cont_desc_movie_back_button_image">Back button</string>
+    <string name="cont_desc_review_link_button">Review URl link button</string>
 
     <string name="movie_detail_section_title_overview">Overview</string>
     <string name="movie_no_plot">No Overview was Found</string>
@@ -26,6 +27,8 @@
     <string name="no_favourited_movie_yet">No favourite movie yet...</string>
     <string name="movie_detail_favourited">Movie added to favourites :)</string>
     <string name="movie_detail_unfavourited">Movie removed from favourites.</string>
+
+    <string name="movie_review_title_suffix">Review</string>
 
     <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, tellus neque elit fusce sed. Libero eu pharetra. Lorem egestas aliquam consequat habitant quis mattis, vel praesent, cubilia pede erat et euismod, morbi proin volutpat sed pellentesque erat, lacus ut arcu. Elit erat tellus, aptent consectetuer at a, amet pretium, a sollicitudin mattis fringilla etiam vivamus, et pulvinar quis metus praesent justo. Nunc mauris, laoreet risus nec pharetra, nullam placerat.
 </string>

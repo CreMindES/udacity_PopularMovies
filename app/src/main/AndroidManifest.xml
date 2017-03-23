@@ -10,8 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,17 @@
         </activity>
 
         <provider
-            android:name="com.example.android.popularmovies.FavMovieContentProvider"
+            android:name=".FavMovieContentProvider"
             android:authorities="com.example.android.popularmovies"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <activity
+            android:name=".ReviewActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.popularmovies.MovieDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

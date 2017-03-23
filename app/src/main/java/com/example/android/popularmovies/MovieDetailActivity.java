@@ -221,8 +221,9 @@ public class MovieDetailActivity extends AppCompatActivity
     public void onClick(Review movieReview) {
         Log.d( TAG, "onClick review" );
         Context context = this;
-//        Intent intent = new Intent(context, ReviewDetailActivity.class );
-//        intent.putExtra( "Review", movieReview );
+        Intent intent = new Intent(context, ReviewActivity.class );
+        intent.putExtra( "Review", movieReview );
+        intent.putExtra( "Movie", movie );
         startActivity( intent );
     }
 
