@@ -79,7 +79,6 @@ public class MovieReviewAdapter
         Review movieReview = movieReviewListData.get( position );
         holder.authorTextView.setText( movieReview.getAuthor() );
         holder.contentTextView.setText( movieReview.getContent() );
-        // holder.urlTextView.setText( movieReview.getUrl().toString() );
     }
 
     @Override
