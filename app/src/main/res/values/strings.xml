@@ -24,6 +24,9 @@
     <string name="movie_detail_max_point_10" translatable="false">/10</string>
     <string name="movie_detail_play">play</string>
 
+    <string name="parc_movie">parc_movie</string>
+    <string name="parc_review">parc_review</string>
+
     <string name="no_favourited_movie_yet">No favourite movie yet...</string>
     <string name="movie_detail_favourited">Movie added to favourites :)</string>
     <string name="movie_detail_unfavourited">Movie removed from favourites.</string>

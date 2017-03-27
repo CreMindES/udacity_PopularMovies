@@ -3,6 +3,7 @@ package com.example.android.popularmovies;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.AsyncTask;
 // import android.support.v7.app.AlertController;
@@ -18,6 +19,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.popularmovies.data.FavMovieContract;
+import com.example.android.popularmovies.databinding.ActivityMainBinding;
+import com.example.android.popularmovies.databinding.ActivityMovieDetailBinding;
 import com.facebook.stetho.Stetho;
 
 import java.lang.reflect.Array;
@@ -33,40 +36,14 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
 
-    private RecyclerView mainRecyclerView;
+    private ActivityMainBinding mBinding;
     private MovieAdapter movieAdapter;
     private ArrayList<MyMovie> favouriteMovieList;
-    private ProgressBar progressBar;
-    private TextView noMovieTextView;
 
     public static final int SHOW_POPULAR   = 1;
     public static final int SHOW_TOP_RATED = 2;
     public static final int SHOW_FAVOURITE = 3;
 
-    public enum SortBy {
-        POPULAR( "Popular", 0, TheMovieDBAPI.SORT_BY_POPOLARITY ),
-        TOPRATED( "Top Rated", 1, TheMovieDBAPI.SORT_BY_TOP_RATED );
-
-        private String stringValue;
-        private int intValue;
-        private String mQueryParam;
-        private SortBy( String toString, int value, String queryParam ) {
-            stringValue = toString;
-            intValue = value;
-            mQueryParam = queryParam;
-        }
-
-        @Override
-        public String toString() {
-            return stringValue;
-        }
-
-        public String toQueryParam() {
-            return mQueryParam;
-        }
-    }
-
-    private SortBy sortBy;
     private int showMoviesBy;
 
     @Override
@@ -76,19 +53,16 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-        sortBy = SortBy.POPULAR;
         showMoviesBy = SHOW_POPULAR;
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager( this, 3 );
         movieAdapter = new MovieAdapter( this );
 
-        mainRecyclerView = ( RecyclerView ) findViewById( R.id.activity_main_recycle_view );
-        mainRecyclerView.setHasFixedSize( true );
-        mainRecyclerView.setLayoutManager( gridLayoutManager );
-        mainRecyclerView.setAdapter( movieAdapter );
-
-        progressBar = (ProgressBar) findViewById( R.id.activity_main_progress_bar );
-        noMovieTextView = (TextView) findViewById( R.id.activity_main_no_movie );
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        
+        mBinding.activityMainRecycleView.setHasFixedSize( true );
+        mBinding.activityMainRecycleView.setLayoutManager( gridLayoutManager );
+        mBinding.activityMainRecycleView.setAdapter( movieAdapter );
 
         loadMovieData(showMoviesBy);
         new FetchFavouriteMovies().execute();
@@ -146,19 +120,19 @@ public class MainActivity extends AppCompatActivity
 
     public void loadMovieData( int showMoviesBy ) {
         new FetchTheMovieDB().execute( showMoviesBy );
-        noMovieTextView.setVisibility(View.INVISIBLE);
+        mBinding.activityMainNoMovie.setVisibility(View.INVISIBLE);
     }
 
     private void showFavouriteMovies() {
         movieAdapter.setMovieData(favouriteMovieList);
 
         int count = movieAdapter.getItemCount();
-        int vis = noMovieTextView.getVisibility();
+        int vis = mBinding.activityMainNoMovie.getVisibility();
         if (count == 0 && vis == View.INVISIBLE) {
-            noMovieTextView.setText(getString(R.string.no_favourited_movie_yet));
-            noMovieTextView.setVisibility(View.VISIBLE);
+            mBinding.activityMainNoMovie.setText(getString(R.string.no_favourited_movie_yet));
+            mBinding.activityMainNoMovie.setVisibility(View.VISIBLE);
         } else if (count > 0 && vis == View.VISIBLE) {
-            noMovieTextView.setVisibility(View.INVISIBLE);
+            mBinding.activityMainNoMovie.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -171,15 +145,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         movieAdapter.setFavouriteFlagsAt(favouriteMovieIdList);
-
-//        @targetAPI(24) {
-//            List<int> favMovieIdList = favouriteMovieList.stream()
-//                    .map(m -> m.getId()).collect(Collectors.toList());
-//        }
-//        ArrayList<int> favMovieIdList = favouriteMovieList.stream()
-//                .map(MyMovie::getId).collect(Collectors.toList());
-
-        // movieAdapter.setFavouriteFlags(  );
     }
 
     public class FetchFavouriteMovies extends AsyncTask< Void, Void, ArrayList<MyMovie> > {
@@ -188,7 +153,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
             // show progress bar
-            progressBar.setVisibility( View.VISIBLE );
+            mBinding.activityMainProgressBar.setVisibility( View.VISIBLE );
         }
 
         @Override
@@ -249,7 +214,7 @@ public class MainActivity extends AppCompatActivity
             }
             setFavouriteFlags();
 
-            progressBar.setVisibility( View.INVISIBLE );
+            mBinding.activityMainProgressBar.setVisibility( View.INVISIBLE );
         }
     }
 
@@ -259,7 +224,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
             // show progress bar
-            progressBar.setVisibility( View.VISIBLE );
+            mBinding.activityMainProgressBar.setVisibility( View.VISIBLE );
         }
 
         @Override
@@ -290,7 +255,7 @@ public class MainActivity extends AppCompatActivity
                 setFavouriteFlags();
             }
 
-            progressBar.setVisibility( View.INVISIBLE );
+            mBinding.activityMainProgressBar.setVisibility( View.INVISIBLE );
         }
     }
 
@@ -306,7 +271,7 @@ public class MainActivity extends AppCompatActivity
         Context context = this;
         Class destinationClass = MovieDetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass );
-        intentToStartDetailActivity.putExtra( "Movie", movie );
+        intentToStartDetailActivity.putExtra( getString( R.string.parc_movie ), movie );
         startActivity( intentToStartDetailActivity );
     }
 }
