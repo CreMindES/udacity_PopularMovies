@@ -49,8 +49,12 @@ public class MovieDetailActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        intent = getIntent();
-        movie = intent.getParcelableExtra( "Movie" );
+        if( savedInstanceState != null ) {
+            movie  = savedInstanceState.getParcelable(getString(R.string.parc_movie));
+        } else {
+            intent = getIntent();
+            movie  = intent.getParcelableExtra(getString(R.string.parc_movie));
+        }
         setTitle( movie.getTitle() );
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
@@ -128,6 +132,12 @@ public class MovieDetailActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState( Bundle outState ) {
+        super.onSaveInstanceState( outState );
+        outState.putParcelable( getString( R.string.parc_movie ), movie);
     }
 
     private void onBackClick(View v ) {
@@ -213,8 +223,8 @@ public class MovieDetailActivity extends AppCompatActivity
         Log.d( TAG, "onClick review" );
         Context context = this;
         Intent intent = new Intent(context, ReviewActivity.class );
-        intent.putExtra( "Review", movieReview );
-        intent.putExtra( "Movie", movie );
+        intent.putExtra( getString( R.string.parc_review ), movieReview );
+        intent.putExtra( getString( R.string.parc_movie ), movie );
         startActivity( intent );
     }
 

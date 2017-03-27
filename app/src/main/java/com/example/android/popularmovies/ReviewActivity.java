@@ -28,8 +28,8 @@ public class ReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review);
 
         intent = getIntent();
-        review = intent.getParcelableExtra("Review");
-        movie  = intent.getParcelableExtra("Movie");
+        review = intent.getParcelableExtra(getString(R.string.parc_review));
+        movie  = intent.getParcelableExtra(getString(R.string.parc_movie));
 
         setTitle(movie.getTitle() + " " + getString( R.string.movie_review_title_suffix));
 
