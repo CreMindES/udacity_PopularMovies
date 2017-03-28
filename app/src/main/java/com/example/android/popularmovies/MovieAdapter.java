@@ -104,7 +104,7 @@ public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapte
     }
 
     public void setFavouriteFlagsAt( ArrayList<Integer> favMovieIdList ) {
-        if( movieData == null || movieData.size() == 0 ) { return; }
+        if( movieData == null ) { return; }
 
         for( MyMovie m : movieData ) {
             for (int fid : favMovieIdList) {

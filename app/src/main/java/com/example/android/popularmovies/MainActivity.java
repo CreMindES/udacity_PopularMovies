@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setFavouriteFlags() {
-        if( showMoviesBy == SHOW_FAVOURITE || favouriteMovieList == null ) { return; }
+        if( showMoviesBy == SHOW_FAVOURITE || favouriteMovieList == null ||
+                movieAdapter.getItemCount() == 0 ) { return; }
 
         ArrayList<Integer> favouriteMovieIdList = new ArrayList<>();
         for( MyMovie fm : favouriteMovieList ) {

@@ -365,30 +365,6 @@ public class MovieDetailActivity extends AppCompatActivity
                 Toast.makeText( getApplicationContext(), "Unable to fetch review list.",
                         Toast.LENGTH_LONG ).show();
             }
-
-            // mBinding.movieDetailProgressBar.setVisibility( View.INVISIBLE );
         }
     }
-
-//    final CollapsingToolbarLayout collapsingToolbarLayout =
-//            (CollapsingToolbarLayout) findViewById(R.id.movie_detail_collapsingToolbar);
-//    AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.movie_detail_appBar);
-//    appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//        boolean isShow = false;
-//        int scrollRange = -1;
-//
-//        @Override
-//        public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-//            if (scrollRange == -1) {
-//                scrollRange = appBarLayout.getTotalScrollRange();
-//            }
-//            if (scrollRange + verticalOffset == 0) {
-//                collapsingToolbarLayout.setTitle("Title");
-//                isShow = true;
-//            } else if(isShow) {
-//                collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
-//                isShow = false;
-//            }
-//        }
-//    });
 }
