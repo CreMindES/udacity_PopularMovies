@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <variable name="cast" type="com.example.android.popularmovies.Cast"/>
+    </data>
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,6 +28,7 @@
             android:textSize="12sp"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
+            android:text="@{cast.name}"
             tools:text="Ethan Hawke"/>
 
         <TextView
@@ -32,6 +38,7 @@
             android:textSize="10sp"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
+            android:text="@{cast.character}"
             tools:text="Vincent Freeman"/>
 
     </LinearLayout>

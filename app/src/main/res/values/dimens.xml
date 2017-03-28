@@ -2,4 +2,16 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginStart">48dp</dimen>
+    <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginEnd">64dp</dimen>
+    <dimen name="activity_detail_play_button_size_big">60dp</dimen>
+    <dimen name="activity_detail_toolbar_backButton_size">24dp</dimen>
+
+    <dimen name="review_item_padding_small">3dp</dimen>
+    <dimen name="review_item_padding_medium">5dp</dimen>
+    <dimen name="review_item_padding_large">10dp</dimen>
+    <dimen name="review_item_text_size">12sp</dimen>
+
+
 </resources>

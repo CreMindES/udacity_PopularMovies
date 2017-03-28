@@ -1,6 +1,11 @@
+/**
+ * Created by cremindes on 07/02/17.
+ */
+
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,17 +14,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.databinding.MovieItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * Created by cremindes on 07/02/17.
- */
-
 public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapterViewHolder >
 {
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
+    private LayoutInflater layoutInflater;
     private ArrayList<MyMovie> movieData;
 
     public MovieAdapter( MovieAdapterOnClickHandler clickHandler ) {
@@ -41,14 +44,12 @@ public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapte
 
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public final TextView  titleTextView;
-        public final ImageView posterImageView;
+        private MovieItemBinding binding;
 
-        public MovieAdapterViewHolder( View view ) {
-            super(view);
-            titleTextView   = (TextView)  view.findViewById( R.id.movie_item_title );
-            posterImageView = (ImageView) view.findViewById( R.id.movie_item_poster );
-            view.setOnClickListener( this );
+        public MovieAdapterViewHolder(MovieItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            this.binding.getRoot().setOnClickListener(this);
         }
 
         /**
@@ -58,31 +59,35 @@ public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapte
          */
         @Override
         public void onClick(View v) {
-            Log.d( TAG, "onClick" );
+            Log.d(TAG, "child onClick");
             int adapterPosition = getAdapterPosition();
-            MyMovie m = movieData.get( adapterPosition );
-            mClickHandler.onClick( m );
+            MyMovie m = movieData.get(adapterPosition);
+            mClickHandler.onClick(m);
         }
     }
 
     @Override
-    public MovieAdapterViewHolder onCreateViewHolder( ViewGroup parent, int viewType ) {
-        Context context = parent.getContext();
-        int layoutIdOfItem = R.layout.movie_item;
-        LayoutInflater inflater = LayoutInflater.from( context );
-        boolean shouldAttachToParentImmediately = false;
-
-        View view = inflater.inflate( layoutIdOfItem, parent, shouldAttachToParentImmediately );
-        return new MovieAdapterViewHolder( view );
+    public MovieAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        if (layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        }
+        final MovieItemBinding binding = DataBindingUtil.inflate(
+                layoutInflater, R.layout.movie_item, viewGroup, false);
+        return new MovieAdapterViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder( MovieAdapterViewHolder holder, int position ) {
-        MyMovie movie = movieData.get( position );
-        String movieTitle = movie.getTitle();
-        Context context = holder.posterImageView.getContext();
-        Picasso.with( context ).load( movie.getPosterURL().toString() ).into( holder.posterImageView );
-        holder.titleTextView.setText( movieTitle );
+    public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
+        MyMovie movie = movieData.get(position);
+        holder.binding.setMovie(movie);
+        holder.binding.executePendingBindings();
+
+        Context context = holder.binding.movieItemPoster.getContext();
+        Picasso.with( context )
+                .load( movie.getPosterURL().toString() )
+                .placeholder(R.drawable.placeholder_100x150)
+                .error(R.drawable.placeholder_100x150)
+                .into( holder.binding.movieItemPoster );
     }
 
     @Override
@@ -93,12 +98,14 @@ public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapte
     }
 
     public void setMovieData( ArrayList<MyMovie> newMovieData ) {
-        Log.d( TAG, "setMoviewData size is " + String.valueOf( newMovieData.size() ) );
+        Log.d( TAG, "setMovieData size is " + String.valueOf( newMovieData.size() ) );
         movieData = newMovieData;
         notifyDataSetChanged();
     }
 
     public void setFavouriteFlagsAt( ArrayList<Integer> favMovieIdList ) {
+        if( movieData == null || movieData.size() == 0 ) { return; }
+
         for( MyMovie m : movieData ) {
             for (int fid : favMovieIdList) {
                 if (fid == m.getId()) {

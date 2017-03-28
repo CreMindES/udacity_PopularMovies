@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.databinding.CastItemBinding;
+import com.example.android.popularmovies.databinding.ReviewItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,14 +47,12 @@ public class MovieReviewAdapter
     public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        public TextView authorTextView;
-        public TextView contentTextView;
+        private final ReviewItemBinding binding;
 
-        public MovieReviewAdapterViewHolder( View view ) {
-            super(view);
-            authorTextView  = (TextView) view.findViewById( R.id.movie_review_author );
-            contentTextView = (TextView) view.findViewById( R.id.movie_review_content );
-            contentTextView.setOnClickListener(this);
+        public MovieReviewAdapterViewHolder(ReviewItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            binding.getRoot().setOnClickListener(this);
         }
 
         @Override
@@ -65,20 +66,17 @@ public class MovieReviewAdapter
 
     @Override
     public MovieReviewAdapter.MovieReviewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
-        Context context = parent.getContext();
-        int layoutIdOfItem = R.layout.review_item;
-        LayoutInflater inflater = LayoutInflater.from( context );
-        boolean shouldAttachToParentImmediately = false;
-
-        View view = inflater.inflate( layoutIdOfItem, parent, shouldAttachToParentImmediately );
-        return new MovieReviewAdapter.MovieReviewAdapterViewHolder( view );
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        final ReviewItemBinding binding = DataBindingUtil.inflate(
+                layoutInflater, R.layout.review_item, parent, false);
+        return new MovieReviewAdapter.MovieReviewAdapterViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder( MovieReviewAdapter.MovieReviewAdapterViewHolder holder, int position ) {
-        Review movieReview = movieReviewListData.get( position );
-        holder.authorTextView.setText( movieReview.getAuthor() );
-        holder.contentTextView.setText( movieReview.getContent() );
+    public void onBindViewHolder(MovieReviewAdapter.MovieReviewAdapterViewHolder holder, int position) {
+        Review movieReview = movieReviewListData.get(position);
+        holder.binding.setReview(movieReview);
+        holder.binding.executePendingBindings();
     }
 
     @Override

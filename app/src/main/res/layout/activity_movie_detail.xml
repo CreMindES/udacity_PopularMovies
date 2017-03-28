@@ -24,8 +24,8 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleMarginEnd="64dp">
+                app:expandedTitleMarginStart="@dimen/activity_detail_collapsingToolbar_expandedTitleMarginStart"
+                app:expandedTitleMarginEnd="@dimen/activity_detail_collapsingToolbar_expandedTitleMarginEnd">
 
                 <ImageView
                     android:id="@+id/movie_detail_backdrop"
@@ -41,8 +41,8 @@
 
                 <ImageButton
                     android:id="@+id/movie_detail_play_button"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/activity_detail_play_button_size_big"
+                    android:layout_height="@dimen/activity_detail_play_button_size_big"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/circle"
                     android:src="@drawable/ic_play_arrow_white_48dp"
@@ -61,14 +61,22 @@
                     app:layout_collapseMode="pin">
 
                     <ImageButton
-                        android:id="@+id/movie_detail_tooolbar_backButton"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:id="@+id/movie_detail_toolbar_backButton"
+                        android:layout_width="@dimen/activity_detail_toolbar_backButton_size"
+                        android:layout_height="@dimen/activity_detail_toolbar_backButton_size"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_arrow_back_white_48dp"
                         android:contentDescription="@string/cont_desc_movie_back_button_image" />
+
+                    <TextView
+                        android:id="@+id/movie_detail_toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/AppTheme.ActionBarTitle"
+                        android:textColor="@android:color/white"
+                        tools:text="Gattaca"/>
 
                 </android.support.v7.widget.Toolbar>
 
@@ -187,26 +195,21 @@
                         android:id="@+id/movie_detail_section_title_plot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:textSize="14sp"
                         android:text="@string/movie_detail_section_title_overview"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        style="@style/SectionTitle" />
 
                     <TextView
                         android:id="@+id/movie_detail_plot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="Sample plot that goes on and on and on ..."/>
+                        tools:text="@string/lorem_ipsum"/>
 
                     <TextView
                         android:id="@+id/movie_detail_section_video"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="5dp"
-                        android:textSize="14sp"
                         android:text="@string/movie_detail_section_title_videos"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                        style="@style/SectionTitle" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/movie_detail_video_recycle_view"
@@ -220,11 +223,8 @@
                         android:id="@+id/movie_detail_section_top_cast"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="5dp"
-                        android:textSize="14sp"
                         android:text="@string/movie_detail_section_title_main_cast"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                        style="@style/SectionTitle"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/movie_detail_cast_recycle_view"
@@ -238,11 +238,8 @@
                         android:id="@+id/movie_detail_section_reviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="5dp"
-                        android:textSize="14sp"
                         android:text="@string/movie_detail_section_title_reviews"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                        style="@style/SectionTitle"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/movie_detail_review_recycle_view"

@@ -16,6 +16,21 @@
     <style name="MyFloatingButton" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <style name="SectionTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="ReviewItem">
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="AppTheme.ActionBarTitle" parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:layout_marginLeft">48dp</item>
+        <item name="android:layout_marginStart">48dp</item>
+    </style>
 
 
 </resources>

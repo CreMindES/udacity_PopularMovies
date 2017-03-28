@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
@@ -117,7 +119,7 @@ public class MovieDetailActivity extends AppCompatActivity
             }
         });
 
-        mBinding.movieDetailTooolbarBackButton.setOnClickListener( new View.OnClickListener() {
+        mBinding.movieDetailToolbarBackButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackClick(v);
@@ -129,6 +131,25 @@ public class MovieDetailActivity extends AppCompatActivity
             public void onClick(View v) {
                 if( movie.getVideoList().size() > 0 ) {
                     playYoutube(movie.getVideoList().get(0));
+                }
+            }
+        });
+
+        mBinding.movieDetailToolbarTitle.setText(movie.getTitle());
+
+        // TODO: implement nicer and in a more sophisticated way
+        mBinding.movieDetailAppBar.addOnOffsetChangedListener(new   AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                int height1 = mBinding.movieDetailToolbar.getHeight();
+                int height2 = mBinding.movieDetailCollapsingToolbar.getHeight();
+                int height3 = mBinding.movieDetailBackdrop.getHeight();
+                int offset = -height2 + height1;
+                if( Math.abs(verticalOffset) < height2 - height1 - 100 )
+                {
+                    mBinding.movieDetailToolbarTitle.setVisibility(View.INVISIBLE);
+                } else {
+                    mBinding.movieDetailToolbarTitle.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -348,4 +369,26 @@ public class MovieDetailActivity extends AppCompatActivity
             // mBinding.movieDetailProgressBar.setVisibility( View.INVISIBLE );
         }
     }
+
+//    final CollapsingToolbarLayout collapsingToolbarLayout =
+//            (CollapsingToolbarLayout) findViewById(R.id.movie_detail_collapsingToolbar);
+//    AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.movie_detail_appBar);
+//    appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//        boolean isShow = false;
+//        int scrollRange = -1;
+//
+//        @Override
+//        public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+//            if (scrollRange == -1) {
+//                scrollRange = appBarLayout.getTotalScrollRange();
+//            }
+//            if (scrollRange + verticalOffset == 0) {
+//                collapsingToolbarLayout.setTitle("Title");
+//                isShow = true;
+//            } else if(isShow) {
+//                collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+//                isShow = false;
+//            }
+//        }
+//    });
 }

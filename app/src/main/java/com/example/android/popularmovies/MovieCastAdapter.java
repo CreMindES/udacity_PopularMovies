@@ -1,14 +1,13 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.example.android.popularmovies.databinding.CastItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,41 +26,34 @@ public class MovieCastAdapter
 
     public class MovieCastAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        public final TextView nameTextView;
-        public final TextView characterTextView;
-        public final ImageView profileImageView;
+        private final CastItemBinding binding;
 
-        public MovieCastAdapterViewHolder( View view ) {
-            super(view);
-            nameTextView      = (TextView)  view.findViewById( R.id.movie_cast_item_name );
-            characterTextView = (TextView)  view.findViewById( R.id.movie_cast_item_character );
-            profileImageView  = (ImageView) view.findViewById( R.id.movie_cast_item_profile_image );
+        public MovieCastAdapterViewHolder(CastItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     @Override
     public MovieCastAdapter.MovieCastAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
-        Context context = parent.getContext();
-        int layoutIdOfItem = R.layout.cast_item;
-        LayoutInflater inflater = LayoutInflater.from( context );
-        boolean shouldAttachToParentImmediately = false;
-
-        View view = inflater.inflate( layoutIdOfItem, parent, shouldAttachToParentImmediately );
-        return new MovieCastAdapter.MovieCastAdapterViewHolder( view );
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        final CastItemBinding binding = DataBindingUtil.inflate(
+                layoutInflater, R.layout.cast_item, parent, false);
+        return new MovieCastAdapter.MovieCastAdapterViewHolder( binding );
     }
 
     @Override
     public void onBindViewHolder( MovieCastAdapter.MovieCastAdapterViewHolder holder, int position ) {
         Cast cast = movieCastData.get( position );
-        Context context = holder.profileImageView.getContext();
+        holder.binding.setCast(cast);
+        holder.binding.executePendingBindings();
+
+        Context context = holder.binding.movieCastItemProfileImage.getContext();
         Picasso.with( context )
                 .load( cast.getProfileURL().toString() )
                 .placeholder( R.drawable.placeholder_100x150 )
                 .error( R.drawable.placeholder_100x150 )
-                .into( holder.profileImageView );
-
-        holder.nameTextView.setText( cast.getName() );
-        holder.characterTextView.setText( cast.getCharacter() );
+                .into( holder.binding.movieCastItemProfileImage );
     }
 
     @Override
