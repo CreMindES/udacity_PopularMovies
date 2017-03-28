@@ -20,16 +20,10 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies.data.FavMovieContract;
 import com.example.android.popularmovies.databinding.ActivityMainBinding;
-import com.example.android.popularmovies.databinding.ActivityMovieDetailBinding;
 import com.facebook.stetho.Stetho;
 
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity
         implements MovieAdapter.MovieAdapterOnClickHandler {
