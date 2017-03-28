@@ -4,19 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.AsyncTask;
-// import android.support.v7.app.AlertController;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.android.popularmovies.data.FavMovieContract;
 import com.example.android.popularmovies.databinding.ActivityMainBinding;
@@ -65,7 +60,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        // TODO optimize! Only refetch in case of change has happaned
+        // TODO optimize! Only re-fetch in case of change has happened
         if( showMoviesBy == SHOW_FAVOURITE ) {
             new FetchFavouriteMovies().execute();
         }

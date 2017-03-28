@@ -102,11 +102,7 @@ public class MyMovie implements Parcelable {
         } catch ( ParseException e ) {
             e.printStackTrace();
             return null;
-        }//            Uri uri = FavMovieContract.FavMovieEntry.CONTENT_URI;
-//            uri = uri.buildUpon().appendPath(idString).build();
-//
-//            getContentResolver().delete( uri, null, null );
-
+        }
         return d;
     }
 

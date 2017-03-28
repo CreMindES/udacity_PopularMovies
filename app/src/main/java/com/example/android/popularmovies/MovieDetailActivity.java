@@ -141,11 +141,9 @@ public class MovieDetailActivity extends AppCompatActivity
         mBinding.movieDetailAppBar.addOnOffsetChangedListener(new   AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int height1 = mBinding.movieDetailToolbar.getHeight();
-                int height2 = mBinding.movieDetailCollapsingToolbar.getHeight();
-                int height3 = mBinding.movieDetailBackdrop.getHeight();
-                int offset = -height2 + height1;
-                if( Math.abs(verticalOffset) < height2 - height1 - 100 )
+                int  tHeight = mBinding.movieDetailToolbar.getHeight();
+                int ctHeight = mBinding.movieDetailCollapsingToolbar.getHeight();
+                if( Math.abs(verticalOffset) < ctHeight - tHeight - 100 )
                 {
                     mBinding.movieDetailToolbarTitle.setVisibility(View.INVISIBLE);
                 } else {
@@ -294,8 +292,6 @@ public class MovieDetailActivity extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // show progress bar
-            // mBinding.movieDetailProgressBar.setVisibility( View.VISIBLE );
         }
 
         @Override
