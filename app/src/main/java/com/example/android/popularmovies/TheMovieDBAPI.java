@@ -22,7 +22,7 @@ import java.util.Scanner;
  */
 
 public class TheMovieDBAPI {
-    public static final String API_KEY = "INSERT_YOUR_API_KEY_HERE";
+    public static final String API_KEY = BuildConfig.THE_MOVIE_DB_API_TOKEN;
     public static final String API_KEY_PARAM = "api_key";
 
     public static final String API_BASE_URL = "http://api.themoviedb.org/3/movie";
