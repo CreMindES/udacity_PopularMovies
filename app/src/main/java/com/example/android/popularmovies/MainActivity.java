@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
     private static final String GRID_LAYOUT_MANAGER_STATE = "gridLayoutManagerState";
     private static final String GRID_LAYOUT_MANAGER_POSITION = "gridLayoutManagerPosition";
+    private static final String SHOW_MOVIES_BY = "showMoviesBy";
 
     private ActivityMainBinding mBinding;
     private MovieAdapter movieAdapter;
@@ -46,8 +47,11 @@ public class MainActivity extends AppCompatActivity
         Stetho.initializeWithDefaults(this);
 
         setContentView(R.layout.activity_main);
-
-        showMoviesBy = SHOW_POPULAR;
+        if( savedInstanceState == null ) {
+            showMoviesBy = SHOW_POPULAR;
+        } else {
+            showMoviesBy = savedInstanceState.getInt(SHOW_MOVIES_BY);
+        }
 
         gridLayoutManager = new GridLayoutManager( this, 3 );
         movieAdapter = new MovieAdapter( this );
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity
 
     private void onMoviesFetchedFully(Bundle savedInstanceState) {
         gridLayoutManager.scrollToPosition(lastGridPosition);
-        
+
         if(savedInstanceState == null) { return; }
         gridLayoutManager.onRestoreInstanceState(
                 savedInstanceState.getParcelable(GRID_LAYOUT_MANAGER_STATE));
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
         outState.putParcelable(GRID_LAYOUT_MANAGER_STATE, gridLayoutManager.onSaveInstanceState());
         outState.putInt(GRID_LAYOUT_MANAGER_POSITION, gridLayoutManager.findFirstVisibleItemPosition());
+        outState.putInt(SHOW_MOVIES_BY, showMoviesBy);
     }
 
     @Override
@@ -117,6 +122,7 @@ public class MainActivity extends AppCompatActivity
         gridLayoutManager.onRestoreInstanceState(
                 savedInstanceState.getParcelable(GRID_LAYOUT_MANAGER_STATE));
         lastGridPosition = savedInstanceState.getInt(GRID_LAYOUT_MANAGER_POSITION);
+        showMoviesBy = savedInstanceState.getInt(SHOW_MOVIES_BY);
     }
 
     @Override
