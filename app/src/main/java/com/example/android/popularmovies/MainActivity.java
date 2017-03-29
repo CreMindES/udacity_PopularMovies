@@ -2,6 +2,7 @@ package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
@@ -53,7 +54,11 @@ public class MainActivity extends AppCompatActivity
             showMoviesBy = savedInstanceState.getInt(SHOW_MOVIES_BY);
         }
 
-        gridLayoutManager = new GridLayoutManager( this, 3 );
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            gridLayoutManager = new GridLayoutManager(this, 3);
+        } else {
+            gridLayoutManager = new GridLayoutManager(this, 5);
+        }
         movieAdapter = new MovieAdapter( this );
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
