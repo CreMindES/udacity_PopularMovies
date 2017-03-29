@@ -24,10 +24,15 @@ public class MainActivity extends AppCompatActivity
         implements MovieAdapter.MovieAdapterOnClickHandler {
 
     private static final String TAG = TheMovieDBAPI.class.getSimpleName();
+    private static final String GRID_LAYOUT_MANAGER_STATE = "gridLayoutManagerState";
+    private static final String GRID_LAYOUT_MANAGER_POSITION = "gridLayoutManagerPosition";
 
     private ActivityMainBinding mBinding;
     private MovieAdapter movieAdapter;
     private ArrayList<MyMovie> favouriteMovieList;
+    private GridLayoutManager gridLayoutManager;
+    private Bundle savedInstanceState;
+    private int lastGridPosition;
 
     public static final int SHOW_POPULAR   = 1;
     public static final int SHOW_TOP_RATED = 2;
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         showMoviesBy = SHOW_POPULAR;
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager( this, 3 );
+        gridLayoutManager = new GridLayoutManager( this, 3 );
         movieAdapter = new MovieAdapter( this );
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -55,6 +60,19 @@ public class MainActivity extends AppCompatActivity
 
         loadMovieData(showMoviesBy);
         new FetchFavouriteMovies().execute();
+
+        if( savedInstanceState != null ) {
+            gridLayoutManager.onRestoreInstanceState(
+                    savedInstanceState.getParcelable(GRID_LAYOUT_MANAGER_STATE));
+        }
+    }
+
+    private void onMoviesFetchedFully(Bundle savedInstanceState) {
+        gridLayoutManager.scrollToPosition(lastGridPosition);
+        
+        if(savedInstanceState == null) { return; }
+        gridLayoutManager.onRestoreInstanceState(
+                savedInstanceState.getParcelable(GRID_LAYOUT_MANAGER_STATE));
     }
 
     @Override
@@ -67,10 +85,38 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        gridLayoutManager.scrollToPosition(lastGridPosition);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lastGridPosition = gridLayoutManager.findFirstVisibleItemPosition();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu( Menu menu )
     {
         getMenuInflater().inflate( R.menu.main, menu );
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(GRID_LAYOUT_MANAGER_STATE, gridLayoutManager.onSaveInstanceState());
+        outState.putInt(GRID_LAYOUT_MANAGER_POSITION, gridLayoutManager.findFirstVisibleItemPosition());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState == null) { return; }
+        super.onRestoreInstanceState(savedInstanceState);
+        gridLayoutManager.onRestoreInstanceState(
+                savedInstanceState.getParcelable(GRID_LAYOUT_MANAGER_STATE));
+        lastGridPosition = savedInstanceState.getInt(GRID_LAYOUT_MANAGER_POSITION);
     }
 
     @Override
@@ -203,6 +249,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
             setFavouriteFlags();
+            onMoviesFetchedFully(savedInstanceState);
 
             mBinding.activityMainProgressBar.setVisibility( View.INVISIBLE );
         }
@@ -243,6 +290,7 @@ public class MainActivity extends AppCompatActivity
             if( movieData != null) {
                 movieAdapter.setMovieData( movieData );
                 setFavouriteFlags();
+                onMoviesFetchedFully(savedInstanceState);
             }
 
             mBinding.activityMainProgressBar.setVisibility( View.INVISIBLE );
