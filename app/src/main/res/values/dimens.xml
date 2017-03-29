@@ -7,6 +7,7 @@
     <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginEnd">64dp</dimen>
     <dimen name="activity_detail_play_button_size_big">60dp</dimen>
     <dimen name="activity_detail_toolbar_backButton_size">24dp</dimen>
+    <dimen name="activity_detail_backdrop_height_landscape">200dp</dimen>
 
     <dimen name="review_item_padding_small">3dp</dimen>
     <dimen name="review_item_padding_medium">5dp</dimen>
