@@ -216,7 +216,18 @@ public class MovieDetailActivity extends AppCompatActivity
         try {
             Intent intent = new Intent( Intent.ACTION_VIEW, movieVideo.getYoutubeAppUri() );
             intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
-            startActivity( intent );
+            // Verify that the intent will resolve to an activity
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                intent = new Intent( Intent.ACTION_VIEW, movieVideo.getYoutubeWebUri() );
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText( getApplicationContext(), "Unable to play video.",
+                            Toast.LENGTH_LONG ).show();
+                }
+            }
 
         } catch (ActivityNotFoundException e) {
             // youtube is not installed. Will be opened in other available apps
