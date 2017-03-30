@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter< MovieAdapter.MovieAdapterViewHolder >
 {
-    private static final String TAG = TheMovieDBAPI.class.getSimpleName();
+    private static final String TAG = MovieAdapter.class.getSimpleName();
     private LayoutInflater layoutInflater;
     private ArrayList<MyMovie> movieData;
 

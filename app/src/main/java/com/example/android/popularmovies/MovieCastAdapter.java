@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class MovieCastAdapter
         extends RecyclerView.Adapter< MovieCastAdapter.MovieCastAdapterViewHolder > {
 
-    private static final String TAG = TheMovieDBAPI.class.getSimpleName();
+    private static final String TAG = MovieCastAdapter.class.getSimpleName();
     private ArrayList<Cast> movieCastData;
 
     public MovieCastAdapter() { }

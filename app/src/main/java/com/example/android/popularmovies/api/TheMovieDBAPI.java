@@ -1,9 +1,14 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.api;
 
-import android.content.res.Resources;
 import android.net.Uri;
-import android.provider.Settings;
 import android.util.Log;
+
+import com.example.android.popularmovies.BuildConfig;
+import com.example.android.popularmovies.Cast;
+import com.example.android.popularmovies.MainActivity;
+import com.example.android.popularmovies.MovieVideo;
+import com.example.android.popularmovies.MyMovie;
+import com.example.android.popularmovies.Review;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +25,8 @@ import java.util.Scanner;
 /**
  * Created by cremindes on 06/02/17.
  */
+
+// TODO: start using Retrofit
 
 public class TheMovieDBAPI {
 

@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
 
+import com.example.android.popularmovies.api.TheMovieDBAPI;
+
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

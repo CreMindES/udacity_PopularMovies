@@ -8,7 +8,6 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.android.popularmovies.api.TheMovieDBAPI;
 import com.example.android.popularmovies.data.FavMovieContract;
 import com.example.android.popularmovies.databinding.ActivityMovieDetailBinding;
 import com.squareup.picasso.Picasso;

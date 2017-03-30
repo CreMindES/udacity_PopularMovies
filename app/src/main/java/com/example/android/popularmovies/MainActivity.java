@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.android.popularmovies.api.TheMovieDBAPI;
 import com.example.android.popularmovies.data.FavMovieContract;
 import com.example.android.popularmovies.databinding.ActivityMainBinding;
 import com.facebook.stetho.Stetho;
@@ -219,6 +220,7 @@ public class MainActivity extends AppCompatActivity
         movieAdapter.setFavouriteFlagsAt(favouriteMovieIdList);
     }
 
+    // TODO: separate class plus start using SyncAdapter and hence unify our content provider
     public class FetchFavouriteMovies extends AsyncTask< Void, Void, ArrayList<MyMovie> > {
 
         @Override
