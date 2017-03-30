@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             showMoviesBy = savedInstanceState.getInt(SHOW_MOVIES_BY);
         }
+        mySsetTitle( showMoviesBy );
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             gridLayoutManager = new GridLayoutManager(this, 3);
@@ -162,6 +163,21 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected( item );
+    }
+
+    public void mySsetTitle( int showMovieBy ) {
+        switch (showMovieBy) {
+            case SHOW_POPULAR:
+                setTitle( getString( R.string.appbar_title_popular_movies  ) );
+                break;
+            case SHOW_TOP_RATED:
+                setTitle( getString( R.string.appbar_title_top_rated_movies) );
+                break;
+            case SHOW_FAVOURITE:
+                setTitle( getString( R.string.appbar_title_favourite_movies) );
+                break;
+            default:
+        }
     }
 
     public void loadMovieData( int showMoviesBy ) {

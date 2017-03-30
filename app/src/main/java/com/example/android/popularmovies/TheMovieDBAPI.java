@@ -22,6 +22,7 @@ import java.util.Scanner;
  */
 
 public class TheMovieDBAPI {
+
     public static final String API_KEY = BuildConfig.THE_MOVIE_DB_API_TOKEN;
     public static final String API_KEY_PARAM = "api_key";
 
