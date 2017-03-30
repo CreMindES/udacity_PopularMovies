@@ -3,16 +3,62 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginStart">48dp</dimen>
-    <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginEnd">64dp</dimen>
-    <dimen name="activity_detail_play_button_size_big">60dp</dimen>
-    <dimen name="activity_detail_toolbar_backButton_size">24dp</dimen>
-    <dimen name="activity_detail_backdrop_height_landscape">200dp</dimen>
+
+    <dimen name="activity_movie_detail_collapsingToolbar_expanded_title_margin_start">48dp</dimen>
+    <dimen name="activity_movie_detail_collapsingToolbar_expanded_title_margin_end">64dp</dimen>
+    <dimen name="activity_movie_detail_play_button_size_big">60dp</dimen>
+    <dimen name="activity_movie_detail_toolbar_backButton_size">24dp</dimen>
+    <dimen name="activity_movie_detail_play_button_margin_top">0dp</dimen>
+    <dimen name="activity_movie_detail_backdrop_height_landscape">200dp</dimen>
+    <dimen name="activity_movie_detail_movie_detail_title_font_size">18sp</dimen>
+
+    <dimen name="activity_movie_detail_poster_margin_top">10dp</dimen>
+    <dimen name="activity_movie_detail_poster_margin_bottom">5dp</dimen>
+    <dimen name="activity_movie_detail_poster_margin_start">10dp</dimen>
+    <dimen name="activity_movie_detail_poster_margin_end">20dp</dimen>
+
+    <dimen name="activity_movie_detail_title_font_size">18sp</dimen>
+    <dimen name="activity_movie_detail_title_margin_top">10dp</dimen>
+    <dimen name="activity_movie_detail_title_margin_bottom">5dp</dimen>
+
+    <dimen name="activity_movie_detail_year_font_size">16sp</dimen>
+    <dimen name="activity_movie_detail_year_margin_top">5dp</dimen>
+    <dimen name="activity_movie_detail_year_margin_bottom">3dp</dimen>
+
+    <dimen name="activity_movie_detail_month_date_font_size">12sp</dimen>
+    <dimen name="activity_movie_detail_month_date_margin_top">5dp</dimen>
+    <dimen name="activity_movie_detail_month_date_margin_bottom">3dp</dimen>
+    <dimen name="activity_movie_detail_month_date_margin_start">3dp</dimen>
+
+    <dimen name="activity_movie_detail_rating_font_size">22sp</dimen>
+    <dimen name="activity_movie_detail_rating_max_font_size">12sp</dimen>
+
+    <dimen name="activity_movie_detail_section_plot_margin_start">30dp</dimen>
+
+    <dimen name="activity_movie_detail_fragment_2_padding">10dp</dimen>
+    <dimen name="activity_movie_detail_fragment_3_padding">10dp</dimen>
+
+    <dimen name="activity_review_link_size">48dp</dimen>
+    <dimen name="activity_review_content_margin_top">50dp</dimen>
+
+    <dimen name="movie_item_margin">6dp</dimen>
+    <dimen name="movie_item_title_font_size">16sp</dimen>
+
+    <dimen name="movie_video_container_padding_side">10dp</dimen>
+    <dimen name="video_item_thumbnail_icon_size">40dp</dimen>
+    <dimen name="video_item_thumbnail_height">100dp</dimen>
+
+    <dimen name="movie_cast_item_container_padding">3dp</dimen>
+    <dimen name="movie_cast_item_width">75dp</dimen>
+    <dimen name="movie_cast_item_name_font_size">12sp</dimen>
+    <dimen name="movie_cast_item_padding_side">3dp</dimen>
+    <dimen name="movie_cast_item_character_font_size">10sp</dimen>
 
     <dimen name="review_item_padding_small">3dp</dimen>
     <dimen name="review_item_padding_medium">5dp</dimen>
     <dimen name="review_item_padding_large">10dp</dimen>
     <dimen name="review_item_text_size">12sp</dimen>
+
 
 
 </resources>

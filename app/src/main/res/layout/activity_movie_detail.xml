@@ -24,8 +24,8 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginStart="@dimen/activity_detail_collapsingToolbar_expandedTitleMarginStart"
-                app:expandedTitleMarginEnd="@dimen/activity_detail_collapsingToolbar_expandedTitleMarginEnd">
+                app:expandedTitleMarginStart="@dimen/activity_movie_detail_collapsingToolbar_expanded_title_margin_start"
+                app:expandedTitleMarginEnd="@dimen/activity_movie_detail_collapsingToolbar_expanded_title_margin_end">
 
                 <ImageView
                     android:id="@+id/movie_detail_backdrop"
@@ -41,9 +41,9 @@
 
                 <ImageButton
                     android:id="@+id/movie_detail_play_button"
-                    android:layout_width="@dimen/activity_detail_play_button_size_big"
-                    android:layout_height="@dimen/activity_detail_play_button_size_big"
-                    android:layout_marginTop="0dp"
+                    android:layout_width="@dimen/activity_movie_detail_play_button_size_big"
+                    android:layout_height="@dimen/activity_movie_detail_play_button_size_big"
+                    android:layout_marginTop="@dimen/activity_movie_detail_play_button_margin_top"
                     android:background="@drawable/circle"
                     android:src="@drawable/ic_play_arrow_white_48dp"
                     android:layout_centerHorizontal="true"
@@ -62,8 +62,8 @@
 
                     <ImageButton
                         android:id="@+id/movie_detail_toolbar_backButton"
-                        android:layout_width="@dimen/activity_detail_toolbar_backButton_size"
-                        android:layout_height="@dimen/activity_detail_toolbar_backButton_size"
+                        android:layout_width="@dimen/activity_movie_detail_toolbar_backButton_size"
+                        android:layout_height="@dimen/activity_movie_detail_toolbar_backButton_size"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
@@ -100,19 +100,20 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/cont_desc_movie_poster_image"
-                    android:layout_marginTop="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="20dp"
-                    android:paddingBottom="5dp"
+                    android:layout_marginTop="@dimen/activity_movie_detail_poster_margin_top"
+                    android:paddingStart="@dimen/activity_movie_detail_poster_margin_start"
+                    android:paddingLeft="@dimen/activity_movie_detail_poster_margin_start"
+                    android:paddingEnd="@dimen/activity_movie_detail_poster_margin_end"
+                    android:paddingRight="@dimen/activity_movie_detail_poster_margin_end"
+                    android:paddingBottom="@dimen/activity_movie_detail_poster_margin_bottom"
                     tools:src="@drawable/placeholder_100x150"/>
 
                 <LinearLayout
+                    android:id="@+id/movie_detail_fragment_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp"
+                    android:padding="@dimen/activity_movie_detail_fragment_2_padding"
                     android:layout_toRightOf="@+id/movie_detail_poster"
                     android:layout_toEndOf="@+id/movie_detail_poster">
 
@@ -126,11 +127,11 @@
                             android:id="@+id/movie_detail_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/activity_movie_detail_title_font_size"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            tools:text="Sample Title"/>
+                            android:layout_marginTop="@dimen/activity_movie_detail_title_margin_top"
+                            android:layout_marginBottom="@dimen/activity_movie_detail_title_margin_bottom"
+                            tools:text="Sample Title which is very very long"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -141,20 +142,20 @@
                                 android:id="@+id/movie_detail_year"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="3dp"
+                                android:textSize="@dimen/activity_movie_detail_year_font_size"
+                                android:layout_marginTop="@dimen/activity_movie_detail_year_margin_top"
+                                android:layout_marginBottom="@dimen/activity_movie_detail_year_margin_bottom"
                                 tools:text="Year"/>
 
                             <TextView
                                 android:id="@+id/movie_detail_month_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="3dp"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginStart="3dp"
+                                android:textSize="@dimen/activity_movie_detail_month_date_font_size"
+                                android:layout_marginTop="@dimen/activity_movie_detail_month_date_margin_top"
+                                android:layout_marginBottom="@dimen/activity_movie_detail_month_date_margin_bottom"
+                                android:layout_marginLeft="@dimen/activity_movie_detail_month_date_margin_start"
+                                android:layout_marginStart="@dimen/activity_movie_detail_month_date_margin_start"
                                 tools:text="Month 1"/>
 
                         </LinearLayout>
@@ -168,7 +169,7 @@
                                 android:id="@+id/movie_detail_rating"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="22sp"
+                                android:textSize="@dimen/activity_movie_detail_rating_font_size"
                                 tools:text="9.9"/>
 
                             <TextView
@@ -176,7 +177,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/movie_detail_max_point_10"
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/activity_movie_detail_rating_max_font_size" />
 
                         </LinearLayout>
 
@@ -185,11 +186,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/movie_detail_fragment_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/movie_detail_poster"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="@dimen/activity_movie_detail_fragment_3_padding">
 
                     <TextView
                         android:id="@+id/movie_detail_section_title_plot"

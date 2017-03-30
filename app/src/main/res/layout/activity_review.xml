@@ -32,19 +32,22 @@
 
                 <ImageButton
                     android:id="@+id/activity_review_link"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/activity_review_link_size"
+                    android:layout_height="@dimen/activity_review_link_size"
                     android:src="@drawable/ic_link_black_24dp"
                     style="?android:attr/borderlessButtonStyle"
+                    app:layout_constraintTop_toTopOf="@id/activity_review_author"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_review_author"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:contentDescription="@string/cont_desc_review_link_button" />
+                    android:contentDescription="@string/cont_desc_review_link_button"
+                    tools:layout_editor_absoluteY="97dp" />
 
                 <TextView
                     android:id="@+id/activity_review_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="50dp"
+                    android:paddingTop="@dimen/activity_review_content_margin_top"
                     app:layout_constraintTop_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

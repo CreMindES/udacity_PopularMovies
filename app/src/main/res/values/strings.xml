@@ -14,7 +14,11 @@
     <string name="cont_desc_movie_poster_image">Movie poster image</string>
     <string name="cont_desc_movie_play_button_image">Play button</string>
     <string name="cont_desc_movie_back_button_image">Back button</string>
-    <string name="cont_desc_review_link_button">Review URl link button</string>
+    <string name="cont_desc_review_link_button">Review url link button</string>
+    <string name="cont_desc_movie_item_poster">Movie poster</string>
+    <string name="cont_desc_video_item_thumbnail">Movie video thumbnail image</string>
+    <string name="cont_desc_video_item_thumbnail_icon">Movie video play button</string>
+    <string name="cont_desc_movie_cast_item_profile_image">Movie cast image</string>
 
     <string name="movie_detail_section_title_overview">Overview</string>
     <string name="movie_no_plot">No Overview was Found</string>

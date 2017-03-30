@@ -6,28 +6,33 @@
         android:id="@+id/movie_video_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="10dp">
+        android:paddingRight="@dimen/movie_video_container_padding_side"
+        android:paddingEnd="@dimen/movie_video_container_padding_side"
+        android:paddingStart="@dimen/movie_video_container_padding_side"
+        android:paddingLeft="@dimen/movie_video_container_padding_side">
 
         <ImageView
             android:id="@+id/movie_video_thumbnail"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/video_item_thumbnail_height"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/cont_desc_video_item_thumbnail"
             tools:src="@drawable/placeholder_500x350"/>
 
         <ImageButton
             android:id="@+id/movie_video_thumbnail_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/video_item_thumbnail_icon_size"
+            android:layout_height="@dimen/video_item_thumbnail_icon_size"
             android:background="@drawable/circle"
             android:src="@drawable/ic_play_arrow_white_48dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:layout_gravity="center"
             android:clickable="true"
-            tools:src="@drawable/ic_play_arrow_white_48dp"/>
+            android:contentDescription="@string/cont_desc_video_item_thumbnail_icon"
+            tools:src="@drawable/ic_play_arrow_white_48dp" />
 
 
     </FrameLayout>

@@ -8,36 +8,43 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/movie_cast_item_container"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp">
+        android:padding="@dimen/movie_cast_item_container_padding">
 
         <ImageView
             android:id="@+id/movie_cast_item_profile_image"
-            android:layout_width="75dp"
+            android:layout_width="@dimen/movie_cast_item_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/cont_desc_movie_cast_item_profile_image"
+            tools:src="@drawable/placeholder_100x150" />
 
         <TextView
             android:id="@+id/movie_cast_item_name"
-            android:layout_width="75dp"
+            android:layout_width="@dimen/movie_cast_item_width"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:textSize="@dimen/movie_cast_item_name_font_size"
+            android:paddingLeft="@dimen/movie_cast_item_padding_side"
+            android:paddingRight="@dimen/movie_cast_item_padding_side"
+            android:paddingStart="@dimen/movie_cast_item_padding_side"
+            android:paddingEnd="@dimen/movie_cast_item_padding_side"
             android:text="@{cast.name}"
             tools:text="Ethan Hawke"/>
 
         <TextView
             android:id="@+id/movie_cast_item_character"
-            android:layout_width="75dp"
+            android:layout_width="@dimen/movie_cast_item_width"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:textSize="@dimen/movie_cast_item_character_font_size"
+            android:paddingLeft="@dimen/movie_cast_item_padding_side"
+            android:paddingRight="@dimen/movie_cast_item_padding_side"
+            android:paddingStart="@dimen/movie_cast_item_padding_side"
+            android:paddingEnd="@dimen/movie_cast_item_padding_side"
             android:text="@{cast.character}"
             tools:text="Vincent Freeman"/>
 
