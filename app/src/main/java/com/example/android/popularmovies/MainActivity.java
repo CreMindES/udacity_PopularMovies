@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             showMoviesBy = savedInstanceState.getInt(SHOW_MOVIES_BY);
         }
-        mySsetTitle( showMoviesBy );
+        mySetTitle( showMoviesBy );
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             gridLayoutManager = new GridLayoutManager(this, 3);
@@ -140,20 +140,29 @@ public class MainActivity extends AppCompatActivity
                 break;
             }
             case R.id.action_show_popular: {
+                if (showMoviesBy == SHOW_POPULAR) {
+                    break;
+                }
                 showMoviesBy = SHOW_POPULAR;
-                setTitle( getString( R.string.appbar_title_popular_movies ) );
-                loadMovieData( showMoviesBy );
+                mySetTitle(showMoviesBy);
+                loadMovieData(showMoviesBy);
                 break;
             }
             case R.id.action_show_top_rated: {
+                if (showMoviesBy == SHOW_TOP_RATED) {
+                    break;
+                }
                 showMoviesBy = SHOW_TOP_RATED;
-                setTitle( getString( R.string.appbar_title_top_rated_movies ) );
-                loadMovieData( showMoviesBy );
+                mySetTitle(showMoviesBy);
+                loadMovieData(showMoviesBy);
                 break;
             }
             case R.id.action_show_favourites: {
-                setTitle( getString( R.string.appbar_title_favourite_movies ) );
+                if (showMoviesBy == SHOW_FAVOURITE) {
+                    break;
+                }
                 showMoviesBy = SHOW_FAVOURITE;
+                mySetTitle(showMoviesBy);
                 new FetchFavouriteMovies().execute();
                 break;
             }
@@ -165,7 +174,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected( item );
     }
 
-    public void mySsetTitle( int showMovieBy ) {
+    public void mySetTitle( int showMovieBy ) {
         switch (showMovieBy) {
             case SHOW_POPULAR:
                 setTitle( getString( R.string.appbar_title_popular_movies  ) );
