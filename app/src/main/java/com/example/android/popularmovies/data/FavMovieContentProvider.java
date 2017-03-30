@@ -19,6 +19,8 @@ import com.example.android.popularmovies.data.FavMovieDbHelper;
 
 import static com.example.android.popularmovies.data.FavMovieContract.FavMovieEntry.TABLE_NAME;
 
+// TODO: also store the poster and backdrop images
+
 public class FavMovieContentProvider extends ContentProvider {
 
     private static final String TAG = FavMovieContentProvider.class.getSimpleName();
