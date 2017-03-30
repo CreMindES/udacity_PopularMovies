@@ -9,22 +9,26 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/review_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/review_item_padding_medium"
         android:paddingStart="@dimen/review_item_padding_medium"
         android:paddingRight="@dimen/review_item_padding_medium"
         android:paddingEnd="@dimen/review_item_padding_medium"
-        android:paddingBottom="@dimen/review_item_padding_large">
+        android:paddingBottom="@dimen/review_item_padding_large"
+        android:background="?android:attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/movie_review_author"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{review.author}"
+            android:layout_gravity="start"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/john_doe"/>
 
         <TextView
